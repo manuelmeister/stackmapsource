@@ -1,20 +1,6 @@
-# stacktracify
+# stackmapsource
 
 **NOTICE:** This is a modified version of the excellent `stacktracify` CLI-tool, created by: [mifi/stacktracify](https://github.com/mifi/stacktracify)
-
-This modified version allows for passing in a path to a folder of source maps (which was previously limited to a single file). 
-
-In addition to this, support for the following parameters have also been added: 
-
-| Parameter name | Abbreviation | Description                                                                                               |
-|----------------|--------------|-----------------------------------------------------------------------------------------------------------|
-| `--legend`     | `-l`         | Prints a legend, indicating when unable to not find a source map, or resolve line from a found source map |
-| `--debug`      | `-d`         | Prints debug information, useful for determining lookup-logic for relative paths etc.                     |
-
-**WARNING:** This version has not been made available to be installed on [npm](https://www.npmjs.com/), and hence must be installed
-by cloning this repository, running `yarn install` and linking the index.js file as an executable script (or invoke directly)!
-
-## Original documentation
 
 Have you ever been faced with a stacktrace that looks like this?
 
@@ -33,9 +19,9 @@ TypeError h is not a function. (In 'h()', 'h' is undefined)
     [native code] value
 ```
 
-...perhaps from production from a minified web JS bundle or a React Native error report.
+...perhaps from production from a minified web JS bundle, Angular or React Native error report.
 
-**stacktracify takes a source map and a stack trace from your clipboard (or from a file) and outputs a readable stacktrace with proper line numbers for each line**
+**stackmapsource takes a source map and a stack trace from stdin and outputs a readable stacktrace with proper line numbers for each line**
 
 Example output:
 ```
@@ -50,23 +36,18 @@ TypeError h is not a function. (In 'h()', 'h' is undefined)
 ## Install
 
 ```
-npm install -g stacktracify
+npm install -g stackmapsource
 ```
 
 ## Usage
 
-**Copy a minified stacktrace to your clipboard** - then run:
+**Pipe a minified stacktrace to stackmapsource:
 
 ```
-stacktracify /path/to/js.map
+echo "TypeError h is…" | stackmapsource /path/to/js.map
 ```
 
-Can also read stacktrace from file. For more info:
+For more info:
 ```
-stacktracify --help
+stackmapsource --help
 ```
-
-## See also
-
-- https://github.com/gabmontes/source-map-cli (only takes one line at a time)
-- https://github.com/janekp/mapstrace (not a CLI, not easy to use for any stack trace)
